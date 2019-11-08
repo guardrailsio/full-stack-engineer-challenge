@@ -1,5 +1,5 @@
 const tap = require("tap");
-const { get, post } = require("../routes/results");
+const { get, post, validate } = require("../routes/results");
 
 const RFC4122 = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 // from https://github.com/shinnn/github-username-regex
@@ -78,5 +78,12 @@ tap.ok("works with no parameters", post());
 
 tap.test("post() returns valid types", t => {
   typeCheck(post());
+  t.end();
+});
+
+tap.ok(validate(), "validate() works with no parameters");
+
+tap.test("validate() returns valid types", t => {
+  typeCheck(validate());
   t.end();
 });

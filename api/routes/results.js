@@ -90,4 +90,6 @@ const post = () => {
   };
 };
 
-module.exports = { get, post };
+const validate = () => {};
+
+module.exports = { get, post, validate };
