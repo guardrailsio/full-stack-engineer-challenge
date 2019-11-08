@@ -8,15 +8,14 @@ const github = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
 const typeCheck = result => {
   tap.match(result.id, RFC4122, "id is GUID");
   tap.ok(
-    ["Queued", "In Progress", "Success", "Failure"],
-    includes(result.status),
+    ["Queued", "In Progress", "Success", "Failure"].includes(result.status),
     "status is in range"
   );
-  tap.match(result.repositoryName, github, "repo is valid github slug");
+  tap.match(result.repo, github, "repo is valid github slug");
   timestampCheck(result.queuedAt, "queuedAt");
   timestampCheck(result.scanningAt, "scanningAt");
   timestampCheck(result.finishedAt, "finishedAt");
-  result.findings.foreach(finding => findingCheck(finding));
+  result.findings.forEach(finding => findingCheck(finding));
 };
 
 const findingCheck = finding => {
@@ -27,26 +26,26 @@ const findingCheck = finding => {
   );
   tap.match(
     finding.metadata.description,
-    /"[a-zA-Z0-9_\,\.\?\-]{0,100}"/,
+    /[a-zA-Z0-9_\,\.\?\-]{0,100}/,
     "description alphanumeric allowable underscore and punctuation, 100 limit"
   );
   tap.match(
     finding.metadata.severity,
-    /"[a-zA-Z0-9_]{0,12}"/,
+    /[a-zA-Z0-9_]{0,12}/,
     "severity alphanumeric allowable underscore, 12 limit"
   );
   tap.match(
     finding.location.path,
-    /"[a-zA-Z0-9_\/]{0,30}"/,
+    /[a-zA-Z0-9_\/]{0,30}/,
     "path alphanumeric allowable underscore and slash, 30 limit"
   );
   tap.match(
-    Object.keys(finding.location.positions).foreach(index => {
+    Object.keys(finding.location.positions).forEach(index => {
       const position = finding.location.positions[index];
       tap.ok(Number.isInteger(position.line));
       tap.match(
         index,
-        /"[a-zA-Z0-9_]{0,12}"/,
+        /[a-zA-Z0-9_]{0,12}/,
         "location position index is alphanumeric allowable underscore, 12 limit"
       );
     })
@@ -64,4 +63,5 @@ const timestampCheck = (timestamp, label) => {
 const result = get();
 tap.test("get() smoke test", t => {
   typeCheck(result);
+  t.end();
 });
