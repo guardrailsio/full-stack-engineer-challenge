@@ -1,0 +1,31 @@
+{
+  "name": "guardrails-steve",
+  "version": "1.0.0",
+  "description": "GuardRails Challenge with Restify, Dat, and Choo.js",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tape tests/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/urgent/full-stack-engineer-challenge.git"
+  },
+  "keywords": [
+    "guardrails",
+    "dat",
+    "choo"
+  ],
+  "author": "Steve",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/urgent/full-stack-engineer-challenge/issues"
+  },
+  "homepage": "https://github.com/urgent/full-stack-engineer-challenge#readme",
+  "dependencies": {
+    "leaked-handles": "^5.2.0",
+    "tape": "^4.11.0"
+  }
+}
