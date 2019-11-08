@@ -43,4 +43,7 @@ const get = () => {
     finishedAt: 1573244631,
   };
 };
-module.exports = { get };
+
+const post = () => {};
+
+module.exports = { get, post };

@@ -1,5 +1,5 @@
 const tap = require("tap");
-const { get } = require("../routes/results");
+const { get, post } = require("../routes/results");
 
 const RFC4122 = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 // from https://github.com/shinnn/github-username-regex
@@ -60,8 +60,23 @@ const timestampCheck = (timestamp, label) => {
   );
 };
 
-const result = get();
-tap.test("get() smoke test", t => {
+tap.ok(get(), "get() works with no parameters");
+
+tap.test("get() returns valid types", t => {
+  typeCheck(get());
+  t.end();
+});
+
+tap.test("get(:id) returns record with matching id", t => {
+  const result = get("2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d");
   typeCheck(result);
+  t.equals(result.id, "2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d");
+  t.end();
+});
+
+tap.ok("works with no parameters", post());
+
+tap.test("post() returns valid types", t => {
+  typeCheck(post());
   t.end();
 });
