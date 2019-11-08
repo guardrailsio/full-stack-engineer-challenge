@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "tape tests/**/*.js"
+    "test": "tap tests/**/*.js",
+    "dev": "tap tests/**/*.js --watch"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,8 @@
   "homepage": "https://github.com/urgent/full-stack-engineer-challenge#readme",
   "dependencies": {
     "leaked-handles": "^5.2.0",
+    "tap": "^14.9.2",
+    "tap-spec": "^5.0.0",
     "tape": "^4.11.0"
   }
 }
