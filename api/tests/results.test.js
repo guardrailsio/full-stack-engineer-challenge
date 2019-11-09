@@ -9,7 +9,7 @@ const typeCheck = result => {
   timestampCheck(result.queuedAt, "queuedAt");
   timestampCheck(result.scanningAt, "scanningAt");
   timestampCheck(result.finishedAt, "finishedAt");
-  result.findings.forEach(finding => findingCheck(finding));
+  iterators.findings(result, findingCheck);
 };
 
 const findingCheck = finding => {
@@ -33,16 +33,15 @@ const findingCheck = finding => {
     patterns.path(30),
     "finding.location.path matches validation.patterns.path(30)"
   );
-  tap.match(
-    Object.keys(finding.location.positions).forEach(index => {
-      const position = finding.location.positions[index];
-      tap.ok(Number.isInteger(position.line));
-      tap.match(
-        index,
-        patterns.underscore(12),
-        "finding.location.position label matches validation.patterns.underscore(12)"
-      );
-    })
+  iterators.positions(
+    finding,
+    line => tap.ok(Number.isInteger(line)),
+    tap.match,
+    [],
+    [
+      patterns.underscore(12),
+      "finding.location.position label matches validation.patterns.underscore(12)",
+    ]
   );
 };
 

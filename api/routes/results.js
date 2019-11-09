@@ -10,7 +10,7 @@ const get = () => {
         location: {
           path: "connectors/apigateway.go",
           positions: {
-            begin: {
+            abcabcabcabcabcabc: {
               line: 60,
             },
           },
@@ -149,8 +149,7 @@ const iterators = {
     indexerParams = []
   ) => {
     Object.keys(finding.location.positions).forEach(index => {
-      const position = finding.location.positions[index];
-      liner(position.line, ...linerParams);
+      liner(finding.location.positions[index].line, ...linerParams);
       indexer(index, ...indexerParams);
     });
     return true;

@@ -5,8 +5,9 @@ const patterns = {
   RFC4122: /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i,
   // from https://github.com/shinnn/github-username-regex
   github: /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i,
-  ruleId: /[A-Z][0-9]{3,6}/,
-  punctuation: count => new RegExp(`[a-zA-Z0-9_\,\.\?\-]{0,${count}}`, "g"),
+  ruleId: /^[A-Z][0-9]{3,6}$/,
+  punctuation: count =>
+    new RegExp(`^[a-zA-Z0-9 \/\(\)_\,\.\?\-]{0,${count}}$`, "g"),
   underscore: count => new RegExp(`[a-zA-Z0-9_\/]{0,${count}}`, "g"),
   path: count => new RegExp(`[a-zA-Z0-9_\/]{0,${count}}`, "g"),
 };
