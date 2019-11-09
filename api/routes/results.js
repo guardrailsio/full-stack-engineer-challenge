@@ -141,12 +141,19 @@ const iterators = {
     result.findings.forEach(finding => command(finding, ...params));
     return true;
   },
-  positions: (finding = { location: { positions: {} } }, command, params) => {
+  positions: (
+    finding = { location: { positions: {} } },
+    liner = () => {},
+    linerParams = [],
+    indexer = () => {},
+    indexerParams = []
+  ) => {
     Object.keys(finding.location.positions).forEach(index => {
       const position = finding.location.positions[index];
-      command.line(position.line, ...params.line);
-      command.index(index, ...params.index);
+      liner(position.line, ...linerParams);
+      indexer(index, ...indexerParams);
     });
+    return true;
   },
 };
 

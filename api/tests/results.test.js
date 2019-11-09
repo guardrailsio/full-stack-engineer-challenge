@@ -107,3 +107,29 @@ tap.ok(
   }),
   "iterator.findings() works with valid types"
 );
+
+tap.ok(iterators.positions(), "iterators.positions() works with no parameters");
+
+tap.ok(
+  iterators.findings({
+    findings: [
+      {
+        ruleId: matches.ruleId,
+        metadata: {
+          description: matches.punctuation,
+          severity: matches.underscore,
+        },
+        location: {
+          path: matches.path,
+          positions: {
+            [matches.underscore]: {
+              line: 60,
+            },
+          },
+        },
+      },
+    ],
+    findingCheck,
+  }),
+  "iterator.positions() works with valid types"
+);
