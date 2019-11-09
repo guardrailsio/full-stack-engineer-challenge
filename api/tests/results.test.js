@@ -105,5 +105,5 @@ tap.ok(
     ],
     findingCheck,
   }),
-  "iterator.findings() works with no parameters"
+  "iterator.findings() works with valid types"
 );

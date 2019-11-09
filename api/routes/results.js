@@ -137,8 +137,9 @@ const validate = () => {
 };
 
 const iterators = {
-  findings: (result = { findings: [] }, command, params) => {
+  findings: (result = { findings: [] }, command = () => {}, params = []) => {
     result.findings.forEach(finding => command(finding, ...params));
+    return true;
   },
   positions: (finding = { location: { positions: {} } }, command, params) => {
     Object.keys(finding.location.positions).forEach(index => {
