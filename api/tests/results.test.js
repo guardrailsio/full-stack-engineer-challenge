@@ -59,14 +59,6 @@ const findingCheck = finding => {
   );
 };
 
-const timestampCheck = (timestamp, label) => {
-  tap.ok(new Date(timestamp).getTime() > 0, `${label} is valid timestamp`);
-  tap.ok(
-    timestamp > Date.now() / 1000 - 3 * 365 * 24 * 60 * 60,
-    `${label} is less than 3 years old`
-  );
-};
-
 tap.ok(get(), "get() works with no parameters");
 
 tap.test("get() returns valid types", t => {
