@@ -10,7 +10,7 @@ const get = () => {
         location: {
           path: "connectors/apigateway.go",
           positions: {
-            abcabcabcabcabcabc: {
+            begin: {
               line: 60,
             },
           },

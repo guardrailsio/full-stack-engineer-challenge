@@ -1,14 +1,28 @@
 const tap = require("tap");
 const { get, post, validate, iterators } = require("../routes/results");
-const { patterns, matches, status } = require("../utilities/validation");
+const {
+  patterns,
+  matches,
+  status,
+  clocker,
+} = require("../utilities/validation");
 
 const typeCheck = result => {
   tap.match(result.id, patterns.RFC4122, "id is GUID");
   tap.ok(status.includes(result.status), "status is in range");
   tap.match(result.repo, patterns.github, "repo is valid github slug");
-  timestampCheck(result.queuedAt, "queuedAt");
-  timestampCheck(result.scanningAt, "scanningAt");
-  timestampCheck(result.finishedAt, "finishedAt");
+  tap.ok(
+    clocker(result.queuedAt),
+    "queuedAt greater than retention and not in the future"
+  );
+  tap.ok(
+    clocker(result.scanningAt),
+    "scanningAt greater than retention and not in the future"
+  );
+  tap.ok(
+    clocker(result.finishedAt),
+    "finishedAt greater than retention and not in the future"
+  );
   iterators.findings(result, findingCheck);
 };
 
