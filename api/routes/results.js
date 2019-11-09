@@ -144,8 +144,8 @@ const iterators = {
   positions: (
     finding = { location: { positions: {} } },
     liner = () => {},
-    linerParams = [],
     indexer = () => {},
+    linerParams = [],
     indexerParams = []
   ) => {
     Object.keys(finding.location.positions).forEach(index => {
