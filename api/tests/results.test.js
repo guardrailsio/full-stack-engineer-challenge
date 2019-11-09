@@ -1,17 +1,11 @@
 const tap = require("tap");
-const { get, post, validate } = require("../routes/results");
-
-const RFC4122 = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-// from https://github.com/shinnn/github-username-regex
-const github = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
+const { get, post, validate, iterators } = require("../routes/results");
+const { patterns, matches, status } = require("../utilities/validation");
 
 const typeCheck = result => {
-  tap.match(result.id, RFC4122, "id is GUID");
-  tap.ok(
-    ["Queued", "In Progress", "Success", "Failure"].includes(result.status),
-    "status is in range"
-  );
-  tap.match(result.repo, github, "repo is valid github slug");
+  tap.match(result.id, patterns.RFC4122, "id is GUID");
+  tap.ok(status.includes(result.status), "status is in range");
+  tap.match(result.repo, patterns.github, "repo is valid github slug");
   timestampCheck(result.queuedAt, "queuedAt");
   timestampCheck(result.scanningAt, "scanningAt");
   timestampCheck(result.finishedAt, "finishedAt");
@@ -21,23 +15,23 @@ const typeCheck = result => {
 const findingCheck = finding => {
   tap.match(
     finding.ruleId,
-    /[A-Z][0-9]{3,6}/,
-    "ruleId starts with a letter and then 3 to 6 numbers"
+    patterns.ruleId,
+    "finding.ruleId matches validation.patterns.ruleId"
   );
   tap.match(
     finding.metadata.description,
-    /[a-zA-Z0-9_\,\.\?\-]{0,100}/,
-    "description alphanumeric allowable underscore and punctuation, 100 limit"
+    patterns.punctuation(100),
+    "finding.metadata.description matches validation.patterns.punctuation(100)"
   );
   tap.match(
     finding.metadata.severity,
-    /[a-zA-Z0-9_]{0,12}/,
-    "severity alphanumeric allowable underscore, 12 limit"
+    patterns.underscore(12),
+    "finding.metadata.severity matches validation.patterns.underscore(12)"
   );
   tap.match(
     finding.location.path,
-    /[a-zA-Z0-9_\/]{0,30}/,
-    "path alphanumeric allowable underscore and slash, 30 limit"
+    patterns.path(30),
+    "finding.location.path matches validation.patterns.path(30)"
   );
   tap.match(
     Object.keys(finding.location.positions).forEach(index => {
@@ -45,8 +39,8 @@ const findingCheck = finding => {
       tap.ok(Number.isInteger(position.line));
       tap.match(
         index,
-        /[a-zA-Z0-9_]{0,12}/,
-        "location position index is alphanumeric allowable underscore, 12 limit"
+        patterns.underscore(12),
+        "finding.location.position label matches validation.patterns.underscore(12)"
       );
     })
   );
@@ -87,3 +81,29 @@ tap.test("validate() returns valid types", t => {
   typeCheck(validate());
   t.end();
 });
+
+tap.ok(iterators.findings(), "iterators.findings() works with no parameters");
+
+tap.ok(
+  iterators.findings({
+    findings: [
+      {
+        ruleId: matches.ruleId,
+        metadata: {
+          description: matches.punctuation,
+          severity: matches.underscore,
+        },
+        location: {
+          path: matches.path,
+          positions: {
+            [matches.underscore]: {
+              line: 60,
+            },
+          },
+        },
+      },
+    ],
+    findingCheck,
+  }),
+  "iterator.findings() works with no parameters"
+);

@@ -137,10 +137,10 @@ const validate = () => {
 };
 
 const iterators = {
-  findings: (result, command, params) => {
+  findings: (result = { findings: [] }, command, params) => {
     result.findings.forEach(finding => command(finding, ...params));
   },
-  positions: (finding, command, params) => {
+  positions: (finding = { location: { positions: {} } }, command, params) => {
     Object.keys(finding.location.positions).forEach(index => {
       const position = finding.location.positions[index];
       command.line(position.line, ...params.line);
