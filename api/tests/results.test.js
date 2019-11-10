@@ -1,5 +1,12 @@
 const tap = require("tap");
-const { get, post, validate, iterators } = require("../routes/results");
+const {
+  get,
+  post,
+  validate,
+  iterators,
+  generators,
+  findingsTypeChecker,
+} = require("../routes/results");
 const {
   patterns,
   matches,
@@ -7,68 +14,13 @@ const {
   clocker,
 } = require("../utilities/validation");
 
-const typeCheck = result => {
-  tap.match(result.id, patterns.RFC4122, "id is GUID");
-  tap.ok(status.includes(result.status), "status is in range");
-  tap.match(result.repo, patterns.github, "repo is valid github slug");
-  tap.ok(
-    clocker(result.queuedAt),
-    "queuedAt greater than retention and not in the future"
-  );
-  tap.ok(
-    clocker(result.scanningAt),
-    "scanningAt greater than retention and not in the future"
-  );
-  tap.ok(
-    clocker(result.finishedAt),
-    "finishedAt greater than retention and not in the future"
-  );
-  iterators.findings(result, findingCheck);
-};
-
-const findingCheck = finding => {
-  tap.match(
-    finding.ruleId,
-    patterns.ruleId,
-    "finding.ruleId matches validation.patterns.ruleId"
-  );
-  tap.match(
-    finding.metadata.description,
-    patterns.punctuation(100),
-    "finding.metadata.description matches validation.patterns.punctuation(100)"
-  );
-  tap.match(
-    finding.metadata.severity,
-    patterns.underscore(12),
-    "finding.metadata.severity matches validation.patterns.underscore(12)"
-  );
-  tap.match(
-    finding.location.path,
-    patterns.path(30),
-    "finding.location.path matches validation.patterns.path(30)"
-  );
-  iterators.positions(
-    finding,
-    line => tap.ok(Number.isInteger(line)),
-    tap.match,
-    [],
-    [
-      patterns.underscore(12),
-      "finding.location.position label matches validation.patterns.underscore(12)",
-    ]
-  );
-};
-
 tap.ok(get(), "get() works with no parameters");
 
-tap.test("get() returns valid types", t => {
-  typeCheck(get());
-  t.end();
-});
+tap.test(validate(get()), "get() returns valid types");
 
 tap.test("get(:id) returns record with matching id", t => {
   const result = get("2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d");
-  typeCheck(result);
+  validate(result);
   t.equals(result.id, "2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d");
   t.end();
 });
@@ -76,14 +28,12 @@ tap.test("get(:id) returns record with matching id", t => {
 tap.ok("works with no parameters", post());
 
 tap.test("post() returns valid types", t => {
-  typeCheck(post());
+  validate(post());
   t.end();
 });
 
-tap.ok(validate(), "validate() works with no parameters");
-
 tap.test("validate() returns valid types", t => {
-  typeCheck(validate());
+  validate(generators.valid);
   t.end();
 });
 
@@ -108,7 +58,7 @@ tap.ok(
         },
       },
     ],
-    findingCheck,
+    findingsTypeChecker,
   }),
   "iterator.findings() works with valid types"
 );
@@ -144,7 +94,7 @@ tap.ok(
         },
       },
     ],
-    findingCheck,
+    findingsTypeChecker,
   }),
   "iterator.positions() works with valid types"
 );

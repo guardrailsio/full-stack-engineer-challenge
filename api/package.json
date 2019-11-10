@@ -27,6 +27,7 @@
   "homepage": "https://github.com/urgent/full-stack-engineer-challenge#readme",
   "dependencies": {
     "leaked-handles": "^5.2.0",
+    "sanitize": "^2.1.0",
     "tap": "^14.9.2",
     "tap-spec": "^5.0.0",
     "tape": "^4.11.0"
