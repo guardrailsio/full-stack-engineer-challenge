@@ -22,7 +22,7 @@ const matches = {
 // valid status values
 const status = ["Queued", "In Progress", "Success", "Failure"];
 // valid timestamps, 3 year data retention
-const clocker = value =>
+const clock = value =>
   (value > Date.now() / 1000) - 3 * 365 * 24 * 60 * 60 && value < Date.now();
 
 // valid result fields
@@ -42,4 +42,4 @@ const fields = {
   metadata: ["description", "severity"],
 };
 
-module.exports = { patterns, matches, status, clocker, fields };
+module.exports = { patterns, matches, status, clock, fields };
