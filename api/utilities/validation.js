@@ -25,4 +25,21 @@ const status = ["Queued", "In Progress", "Success", "Failure"];
 const clocker = value =>
   (value > Date.now() / 1000) - 3 * 365 * 24 * 60 * 60 && value < Date.now();
 
-module.exports = { patterns, matches, status, clocker };
+// valid result fields
+const fields = {
+  result: [
+    "id",
+    "status",
+    "repo",
+    "findings",
+    "queuedAt",
+    "scanningAt",
+    "finishedAt",
+  ],
+  findings: ["type", "ruleId", "location", "metadata"],
+  location: ["path", "positions"],
+  positions: ["begin", "end"],
+  metadata: ["description", "severity"],
+};
+
+module.exports = { patterns, matches, status, clocker, fields };
