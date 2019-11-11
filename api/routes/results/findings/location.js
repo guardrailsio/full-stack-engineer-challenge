@@ -4,7 +4,7 @@ const { withPosition } = require("./location/positions");
 const createLocation = ({ path = "", positions = {} } = {}) =>
   pipe(withPosition)({
     path,
-    positions,
+    ...{ position: positions },
   });
 
 const withLocation = finding => ({
