@@ -1,5 +1,5 @@
 const tap = require("tap");
-const { factory } = require("../routes/results/factory");
+const { factory } = require("../../routes/results/factory");
 
 tap.same(
   factory.build("result", { id: "1" }, { status: "Success" }, { repo: "test" }),

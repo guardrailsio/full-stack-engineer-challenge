@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { patterns, status, clock } = require("../utilities/validation");
+const { patterns, status, clock } = require("../../utilities/validation");
 const { iterators } = require("./iterators");
 
 const validate = result => {

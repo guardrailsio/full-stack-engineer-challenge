@@ -1,6 +1,7 @@
 const tap = require("tap");
-const { iterators } = require("../routes/results/iterators");
-const { matches } = require("../utilities/validation");
+const { iterators } = require("../../routes/results/iterators");
+const { findingsTypeChecker } = require("../../routes/results/validate");
+const { matches } = require("../../utilities/validation");
 
 tap.ok(iterators.findings(), "iterators.findings() works with no parameters");
 

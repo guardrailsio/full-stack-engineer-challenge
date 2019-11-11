@@ -1,4 +1,4 @@
-const { whitelist } = require("../utilities/frp");
+const { whitelist } = require("../../utilities/frp");
 
 const factory = {
   build: (key, ...params) => whitelist(key, params),
