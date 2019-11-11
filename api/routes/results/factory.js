@@ -1,4 +1,24 @@
-const { whitelist } = require("../../utilities/frp");
+const { pipe, whitelist } = require("../../utilities/frp");
+const { withFindings } = require("./findings");
+
+const createResult = ({
+  id = "",
+  status = "",
+  repo = "",
+  findings = [],
+  queuedAt = Date.now(),
+  scanningAt = Date.now(),
+  finishedAt = Date.now(),
+} = {}) =>
+  pipe(withFindings)({
+    id,
+    status,
+    repo,
+    findings,
+    queuedAt,
+    scanningAt,
+    finishedAt,
+  });
 
 const factory = {
   build: (key, ...params) => whitelist(key, params),
@@ -132,4 +152,4 @@ const factory = {
   },
 };
 
-module.exports = { factory };
+module.exports = { createResult, factory };
