@@ -6,8 +6,7 @@ services:
       context: api
       dockerfile: Dockerfile
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./api:/home/node/app
     ports:
       - 8080:8080
     command: npm start

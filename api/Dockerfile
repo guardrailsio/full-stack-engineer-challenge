@@ -10,4 +10,4 @@ RUN npm install
 
 ADD . .
 
-CMD [ "npm", “run”, "start:prod" ]
+CMD [ "npm", "start"]
