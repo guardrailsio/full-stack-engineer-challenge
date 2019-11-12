@@ -7,6 +7,7 @@
     "test": "test"
   },
   "scripts": {
+    "start": "node index.js",
     "test": "tap",
     "dev": "tap --watch"
   },
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/urgent/full-stack-engineer-challenge#readme",
   "dependencies": {
+    "fastify": "^2.10.0",
     "sanitize": "^2.1.0",
     "tap": "^14.9.2",
     "tap-spec": "^5.0.0"
