@@ -30,7 +30,7 @@ __Things you don’t have to worry about:__
 
 The project should be made available in the `api` directory with meaningful commit messages. Use Node.js and any framework, if you want to use one.
 
-Implement a **production-ready REST API** to create and retrieve a Security Scan Result (“Result”). The Result entity should have the following properties:
+Implement a **simple REST API** to create and retrieve a Security Scan Result (“Result”). The Result entity should have the following properties:
 
 - Id: (unique)
 - Status: (Queued, In Progress, Success, Failure)
@@ -40,7 +40,7 @@ Implement a **production-ready REST API** to create and retrieve a Security Scan
 - ScanningAt: timestamp
 - FinishedAt: timestamp
 
-The Result entity should be stored in a database (any). The implementation should be fully production ready. Wherever you’d have to add something that you feel requires product subscriptions or significant extra time, just mention it in the README.md file.
+The Result entity should be stored in a database (any). Wherever you’d have to add something that you feel requires product subscriptions or significant extra time, just mention it in the README.md file.
 
 __Things you don’t have to worry about:__
 
@@ -67,7 +67,7 @@ Once a scan report was selected, display a list of findings:
 - Severity of finding
 - Path name and line of code of the finding
 
-The implementation should be **fully production-ready**. The application is fairly simple, so you might not want to use any state management libraries – in this case please make sure your state management is clean, simple and easy to test. Wherever you’d have to add something that you feel requires product subscriptions (e.g. Logging 3rd party service) or significant extra time, just mention it in the README.md file.
+The application is fairly simple, so you might not want to use any state management libraries – in this case please make sure your state management is clean, simple and easy to test. Wherever you’d have to add something that you feel requires product subscriptions (e.g. Logging 3rd party service) or significant extra time, just mention it in the README.md file.
 
 __Things you don’t have to worry about:__
 
