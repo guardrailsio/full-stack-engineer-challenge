@@ -4,8 +4,10 @@ const createPosition = ({ key = "begin", position = {} } = {}) => ({
 });
 
 const withPosition = location => ({
-  ...location.positions,
-  ...createPosition(),
+  positions: {
+    ...location.positions,
+    ...createPosition(),
+  },
 });
 
 module.exports = { withPosition };
