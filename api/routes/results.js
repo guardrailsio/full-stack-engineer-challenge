@@ -1,3 +1,6 @@
+const { createResult } = require('./results/factory')
+const { createFinding } = require('./results/findings')
+
 const get = (id = false) => {
   return {
     id: '2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d',
@@ -44,7 +47,20 @@ const get = (id = false) => {
   }
 }
 
-const post = () => {
+const post = request => {
+  const result = createResult({
+    id: '2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d',
+    status: 'Success',
+    repo: 'test'
+  })
+
+  const finding = createFinding({ type: 'sast', ruleId: 'G402' })
+  finding.location.path = 'connectors/apigateway.go'
+  finding.location.positions.begin = { line: 60 }
+  finding.metadata.description = 'TLS InsecureSkipVerify set true.'
+  finding.metadata.severity = 'HIGH'
+  result.addFinding(finding)
+
   return {
     id: '2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d',
     status: 'Success',
