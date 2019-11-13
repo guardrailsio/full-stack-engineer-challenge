@@ -23,9 +23,9 @@ const matches = {
 const status = ['Queued', 'In Progress', 'Success', 'Failure']
 // valid timestamps, 3 year data retention
 const clock = value => {
-  const now = Date.now()
+  const now = Date.now() / 1000
   const retention = now - 3 * 365 * 24 * 60 * 60 * 1000
-  const result = value > retention && value < now
+  const result = value > retention && value <= now
   return result
 }
 
@@ -86,9 +86,9 @@ const valid = {
         }
       }
     ],
-    queuedAt: Date.now(),
-    scanningAt: Date.now(),
-    finishedAt: Date.now()
+    queuedAt: Date.now() / 1000,
+    scanningAt: Date.now() / 1000,
+    finishedAt: Date.now() / 1000
   },
   single: {
     id: '2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d',

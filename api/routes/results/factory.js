@@ -1,14 +1,14 @@
-const { pipe } = require("../../utilities/frp");
-const { withFindings } = require("./findings");
+const { pipe } = require('../../utilities/frp')
+const { withFindings, createFinding } = require('./findings')
 
 const createResult = ({
-  id = "",
-  status = "",
-  repo = "",
+  id = '',
+  status = '',
+  repo = '',
   findings = [],
-  queuedAt = Date.now(),
-  scanningAt = Date.now(),
-  finishedAt = Date.now(),
+  queuedAt = Date.now() / 1000,
+  scanningAt = Date.now() / 1000,
+  finishedAt = Date.now() / 1000
 } = {}) =>
   pipe(withFindings)({
     id,
@@ -18,6 +18,23 @@ const createResult = ({
     queuedAt,
     scanningAt,
     finishedAt,
-  });
+    /**
+     * Add finding to array, overwriting empty mixin as required.
+     *
+     * @param {Object} result Value to add finding
+     * @param {Object} finding Finding to add
+     */
+    addFinding (finding) {
+      const last = this.findings.length - 1
+      if (
+        JSON.stringify(this.findings[last]) === JSON.stringify(createFinding())
+      ) {
+        this.findings[last] = finding
+      } else {
+        this.findings.push(finding)
+      }
+      return this
+    }
+  })
 
-module.exports = { createResult };
+module.exports = { createResult }

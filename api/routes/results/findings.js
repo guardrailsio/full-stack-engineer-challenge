@@ -1,12 +1,12 @@
-const { pipe } = require("../../utilities/frp");
-const { withLocation } = require("./findings/location");
-const { withMetadata } = require("./findings/metadata");
+const { pipe } = require('../../utilities/frp')
+const { withLocation } = require('./findings/location')
+const { withMetadata } = require('./findings/metadata')
 
 const createFinding = ({
-  type = "",
-  ruleId = "",
+  type = '',
+  ruleId = '',
   location = {},
-  metadata = {},
+  metadata = {}
 } = {}) =>
   pipe(
     withLocation,
@@ -15,12 +15,12 @@ const createFinding = ({
     type,
     ruleId,
     location,
-    metadata,
-  });
+    metadata
+  })
 
 const withFindings = result => ({
   ...result,
-  findings: [...result.findings, createFinding()],
-});
+  findings: [...result.findings, createFinding()]
+})
 
-module.exports = { withFindings };
+module.exports = { createFinding, withFindings }
