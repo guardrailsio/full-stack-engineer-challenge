@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/urgent/full-stack-engineer-challenge#readme",
   "dependencies": {
+    "dat-sdk": "^0.3.6",
     "fastify": "^2.10.0",
     "sanitize": "^2.1.0"
   },
