@@ -21,7 +21,7 @@ The backend and frontend exercises should be contained in one repository (monore
 
 The `api` and `dashboard` directories should have their own simple `Dockerfile`, so that they can be built and run individually.
 
-The `docker-compose.yml` file should define both the `api` and `dashboard` as services, which will be automatically built and started upon calling `docker-compose up`. As well a container for a DB can be defined here as well.
+The `docker-compose.yml` file should define both the `api` and `dashboard` as services, which will be automatically built and started upon calling `docker-compose up`. A container for a DB can be defined here as well.
 
 __Things you don’t have to worry about:__
 
