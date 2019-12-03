@@ -32,7 +32,7 @@ __Things you don’t have to worry about:__
 
 The project should be made available in the `api` directory with meaningful commit messages. Use Node.js and any framework, if you want to use one.
 
-Implement a **production-ready REST API** to **CRUD** a Security Scan Result (“Result”). The Result entity should have the following properties:
+Implement a **simple REST API** to **CRUD** a Security Scan Result (“Result”). The Result entity should have the following properties:
 
 - Id: any type of unique id
 - Status: "Queued" | "In Progress" | "Success" | "Failure"
@@ -42,7 +42,7 @@ Implement a **production-ready REST API** to **CRUD** a Security Scan Result (�
 - ScanningAt: timestamp
 - FinishedAt: timestamp
 
-The Result entity should be stored in a database (of your choise). The implementation should be fully production ready. Wherever you’d have to add something that you feel requires product subscriptions or significant extra time, just mention it in the README.md file.
+The Result entity should be stored in a database (of your choise). Wherever you’d have to add something that you feel requires product subscriptions or significant extra time, just mention it in the README.md file.
 
 __Things you don’t have to worry about:__
 
@@ -62,7 +62,7 @@ Implement a simple dashboard that has three **separated** screens:
 
 3. Third screen will only display the list of findings for a selected security scan (selected from the screen number 2) with the following 4 columns: RuleId, Description, Severity and Path name : line number.
 
-The implementation should be **fully production-ready**. The application is fairly simple, so you might not want to use any state management libraries – in this case please make sure your state management is clean, simple and easy to test. As well, we value the use of the latest features of react, _but only if you use them properly_. Wherever you’d have to add something that you feel requires product subscriptions (e.g. Logging 3rd party service) or significant extra time, just mention it in the README.md file.
+The application is fairly simple, so you might not want to use any state management libraries – in this case please make sure your state management is clean, simple and easy to test. As well, we value the use of the latest features of react, _but only if you use them properly_. Wherever you’d have to add something that you feel requires product subscriptions (e.g. Logging 3rd party service) or significant extra time, just mention it in the README.md file.
 
 __Things you don’t have to worry about:__
 
