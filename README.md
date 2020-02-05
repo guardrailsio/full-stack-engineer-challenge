@@ -19,9 +19,9 @@ The backend and frontend exercises should be contained in one repository (monore
 └── README.md # documentation for this repo
 ```
 
-The `api` and `dashboard` directories should have their own simple `Dockerfile`, so that they can be built and run locally.
+The `api` and `dashboard` directories should have their own simple `Dockerfile`, so that they can be built and run individually.
 
-The `docker-compose.yml` file should define both the `api` and `dashboard` as services, which will be automatically built and started upon calling `docker-compose up`.
+The `docker-compose.yml` file should define both the `api` and `dashboard` as services, which will be automatically built and started upon calling `docker-compose up`. A container for a DB can be defined here as well.
 
 __Things you don’t have to worry about:__
 
@@ -32,44 +32,37 @@ __Things you don’t have to worry about:__
 
 The project should be made available in the `api` directory with meaningful commit messages. Use Node.js and any framework, if you want to use one.
 
-Implement a **simple REST API** to create and retrieve a Security Scan Result (“Result”). The Result entity should have the following properties:
+Implement a **simple REST API** to **CRUD** a Security Scan Result (“Result”). The Result entity should have the following properties:
 
-- Id: (unique)
-- Status: (Queued, In Progress, Success, Failure)
-- RepositoryName: String
+- Id: any type of unique id
+- Status: "Queued" | "In Progress" | "Success" | "Failure"
+- RepositoryName: string
 - Findings: JSONB, see [example](example-findings.json)
 - QueuedAt: timestamp
 - ScanningAt: timestamp
 - FinishedAt: timestamp
 
-The Result entity should be stored in a database (any). Wherever you’d have to add something that you feel requires product subscriptions or significant extra time, just mention it in the README.md file.
+The Result entity should be stored in a database (of your choise). Wherever you’d have to add something that you feel requires product subscriptions or significant extra time, just mention it in the README.md file.
 
 __Things you don’t have to worry about:__
 
 - CI configuration / Deployment
 - APM
-- Authentication / Authorisation / Auditing
+- Authentication / Authorization / Auditing
 
 ## Frontend Exercise
 
-The project should be made available in a the `dashboard` directory with meaningful commit messages. You should use ReactJS and JavaScript.
+The project should be made available in a the `dashboard` directory with meaningful commit messages. You should build it using ReactJS.
 
-Implement a simple dashboard that has three screens:
+Implement a simple dashboard that has three **separated** screens:
 
-1. Display a form that allows submitting a scan result
-2. Displays a list of security scan results.
-The list should display the name of the repository, the status of the scan, and the according timestamp.
-If the Scan Report contains findings, display the number in a badge.
-3. Displays the findings for a selected security scan. 
+1. First screen will only display a form that will allow to submit a scan result.
 
-Once a scan report was selected, display a list of findings:
+2. Second screen will only display the list of security scan results. The columns of the list should be: repository name, scan status, findings (is the quantity of findings and should be displayed on a badge/label component, [example here](https://react.semantic-ui.com/elements/label/)), and the according timestamp (i.e.: if `Status` is `Queued`, use `QueuedAt`). 
 
-- RuleId of the finding
-- Description of the finding
-- Severity of finding
-- Path name and line of code of the finding
+3. Third screen will only display the list of findings for a selected security scan (selected from the screen number 2) with the following 4 columns: RuleId, Description, Severity and Path name : line number.
 
-The application is fairly simple, so you might not want to use any state management libraries – in this case please make sure your state management is clean, simple and easy to test. Wherever you’d have to add something that you feel requires product subscriptions (e.g. Logging 3rd party service) or significant extra time, just mention it in the README.md file.
+The application is fairly simple, so you might not want to use any state management libraries – in this case please make sure your state management is clean, simple and easy to test. As well, we value the use of the latest features of react, _but only if you use them properly_. Wherever you’d have to add something that you feel requires product subscriptions (e.g. Logging 3rd party service) or significant extra time, just mention it in the README.md file.
 
 __Things you don’t have to worry about:__
 
