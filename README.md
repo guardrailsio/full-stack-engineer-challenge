@@ -21,7 +21,7 @@ The backend and frontend exercises should be contained in one repository (monore
 
 The `api` and `dashboard` directories should have their own simple `Dockerfile`, so that they can be built and run individually.
 
-The `docker-compose.yml` file should define both the `api` and `dashboard` as services, which will be automatically built and started upon calling `docker-compose up`. A container for a DB can be defined here as well.
+The `docker-compose.yml` file should define both the `api` and `dashboard` as services, which will be automatically built and started upon calling `docker-compose up`. A container for a DB should be defined here as well.
 
 __Things you don’t have to worry about:__
 
@@ -30,9 +30,9 @@ __Things you don’t have to worry about:__
 
 ## Backend Exercise
 
-The project should be made available in the `api` directory with meaningful commit messages. Use Node.js and any framework, if you want to use one.
+The project should be made available in the `api` directory with meaningful commit messages. Use TypeScript + Node.js and any framework.
 
-Implement a **simple REST API** to **CRUD** a Security Scan Result (“Result”). The Result entity should have the following properties:
+Implement a simple **REST** OR **GraphQL** API to **CRUD** a Security Scan Result (“Result”). The Result entity should have the following properties:
 
 - Id: any type of unique id
 - Status: "Queued" | "In Progress" | "Success" | "Failure"
@@ -42,7 +42,7 @@ Implement a **simple REST API** to **CRUD** a Security Scan Result (“Result”
 - ScanningAt: timestamp
 - FinishedAt: timestamp
 
-The Result entity should be stored in a database (of your choise). Wherever you’d have to add something that you feel requires product subscriptions or significant extra time, just mention it in the README.md file.
+The Result entity should be stored in a database (of your choise).
 
 __Things you don’t have to worry about:__
 
@@ -52,7 +52,7 @@ __Things you don’t have to worry about:__
 
 ## Frontend Exercise
 
-The project should be made available in a the `dashboard` directory with meaningful commit messages. You should build it using ReactJS.
+The project should be made available in the `dashboard` directory with meaningful commit messages. Use TypeScript + ReactJS and [Semantic UI React](https://react.semantic-ui.com).
 
 Implement a simple dashboard that has three **separated** screens:
 
@@ -62,10 +62,41 @@ Implement a simple dashboard that has three **separated** screens:
 
 3. Third screen will only display the list of findings for a selected security scan (selected from the screen number 2) with the following 4 columns: RuleId, Description, Severity and Path name : line number.
 
-The application is fairly simple, so you might not want to use any state management libraries – in this case please make sure your state management is clean, simple and easy to test. As well, we value the use of the latest features of react, _but only if you use them properly_. Wherever you’d have to add something that you feel requires product subscriptions (e.g. Logging 3rd party service) or significant extra time, just mention it in the README.md file.
+The application is fairly simple, so you might not want to use any state management libraries – in this case please make sure your state management is clean, simple and easy to test. As well, we value the use of the latest features of react, _but make sure you use them properly_.
 
 __Things you don’t have to worry about:__
 
 - Making it super pretty: The UI should be clean and properly aligned however it does not
-need any extraneous CSS and/or animations. You can use any UI framework you like.
+need any extraneous CSS and/or animations. 
 - CI configuration / Deployment
+
+## Scoring
+| DevOps                 | Points |
+|------------------------|--------|
+| Monorepo               | 0-1    |
+| Docker compose         | 0-2    |
+| README & Documentation | 0-5    |
+
+| Backend   | Points |
+|-----------|--------|
+| Framework | 0-5    |
+| CRUD      | 0-5    |
+| Database  | 0-5    |
+
+| Frontend         | Points |
+|------------------|--------|
+| ReactJS          | 0-5    |
+| Semantic UI      | 0-3    |
+| UI & Screens     | 0-5    |
+| State management | 0-2    |
+
+| General             | Points |
+|---------------------|--------|
+| Commit messages     | 0-2    |
+| TypeScript          | 0-5    |
+| Project structure   | 0-5    |
+| Clean / clear code  | 0-5    |
+| Libraries           | 0-2    |
+| Comments            | 0-2    |
+| Linter / Prettifier | 0-1    |
+| Unit tests          | 0-10   |
