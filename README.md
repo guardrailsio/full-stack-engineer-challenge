@@ -6,7 +6,7 @@
 - [Backend Exercise](#backend-exercise)
 - [Frontend Exercise](#frontend-exercise)
 
-**Note:** Please don't fork this repository, or create a pull request against it. Otherwise other applicants may take inspiration from it. Once the coding challenge is completed, you can submit it via this [Google form](https://forms.gle/f2hekWPJqee6htH28).
+**Note:** Please don't fork this repository, or create a pull request against it. Otherwise other applicants may take inspiration from it.
 
 ## Devops Exercise
 
